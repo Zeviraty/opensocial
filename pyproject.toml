@@ -1,0 +1,17 @@
+[project]
+name = "opensocial"
+dynamic = ["dependencies"]
+authors = [ {name = "Zevvi", email = "Zeviraty@gmail.com"} ]
+description = "A clone of char.social with boards"
+readme = "README.md"
+license-files = ["LICENCSE"]
+version = "0.0.1"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
