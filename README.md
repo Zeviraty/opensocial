@@ -20,7 +20,7 @@
   </a>
 </p>
 
-# About docvi
+# About Open.social
 
 > [!WARNING]
 > This project is unfinished and in alpha - come help out!
