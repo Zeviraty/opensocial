@@ -4,28 +4,12 @@ import shutil
 import toml
 import os
 import click
+import opensocial.utils.config as config
 
-def get_config(key:str) -> dict:
-    """Get a value from specified key in the config"""
-    y = toml.loads(open("zdbs.toml", 'r').read())
-
-    try:
-        return y[key]
-    except KeyError:
-        raise ConfigError(key)
-
-class ConfigError(Exception):
-    """Configuration error for when a key is not found"""
-    def __init__(self,key:str|None=None):
-        if key == None:
-            super().__init__("Unspecified config error")
-        else:
-            super().__init__(f"Error while getting config key: {key}")
-
-DB_FOLDER = str(get_config("db_folder"))
+DB_FOLDER = str(config.get("db.toml","db_folder"))
 
 if type(DB_FOLDER) != str:
-    raise ConfigError("db_folder")
+    raise config.ConfigError("db_folder")
 
 def resolve_schema_path(schema_name, base_path=None, ext=".sql"):
     """Convert schema name like 'test.001' into a path like 'db/schemas/test/001-*.sql'."""
