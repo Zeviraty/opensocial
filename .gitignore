@@ -142,3 +142,4 @@ pyvenv.cfg
 include
 
 *.db
+config
