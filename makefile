@@ -14,7 +14,7 @@ install:
 	@touch clean
 	@touch dbcli
 	@echo '$(PYTHON) -m opensocial.db $$@' > dbcli
-	@echo make run > run.sh
+	@echo make run > run
 	@echo make clean > clean
 	@chmod +x ./dbcli ./run.sh ./clean
 	@mkdir logs -p
