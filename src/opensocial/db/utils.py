@@ -12,9 +12,9 @@ if type(DB_FOLDER) != str:
     raise config.ConfigError("db_folder")
 
 def resolve_schema_path(schema_name, base_path=None, ext=".sql"):
-    """Convert schema name like 'test.001' into a path like 'db/schemas/test/001-*.sql'."""
+    """Convert schema name like 'test.001' into a path like 'schemas/test/001-*.sql'."""
     if base_path == None:
-        base_path = os.path.join(DB_FOLDER,f"schemas/") 
+        base_path = "schemas/" 
     parts = schema_name.split(".")
     if len(parts) != 2:
         raise ValueError(f"Invalid schema name format: '{schema_name}'. Use format 'folder.number'.")
@@ -81,7 +81,7 @@ def init_db(dobackup=True, clickecho=False):
     applied = {row[0] for row in cursor.fetchall()}
     conn.close()
 
-    for root, _, files in os.walk(os.path.join(DB_FOLDER,f"schemas/")):
+    for root, _, files in os.walk("schemas/"):
         dirname = os.path.basename(root)
 
         files.sort()
@@ -90,7 +90,7 @@ def init_db(dobackup=True, clickecho=False):
             if not schema.endswith(".sql"):
                 continue
             schema_name = schema.replace(".sql", "")
-            schema_path = os.path.join(DB_FOLDER,f"schemas/")+dirname+"/"+schema_name+".sql"
+            schema_path = "schemas/"+dirname+"/"+schema_name+".sql"
             display_name = f"{dirname}.{schema_name}" if dirname != "schemas" else schema_name
 
             if display_name in applied:
