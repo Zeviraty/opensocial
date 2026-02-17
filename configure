@@ -1,0 +1,48 @@
+#!/bin/sh
+
+echo "Configuring opensocial..."
+
+if command -v python3 >/dev/null 2>&1; then
+    PYTHON=python3
+elif command -v python >/dev/null 2>&1; then
+    PYTHON=python
+else
+    echo "Error: Python is not installed or not in your PATH."
+    exit 1
+fi
+
+# Check Python version
+PYTHON_VERSION=$(${PYTHON} -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+echo "Found Python $PYTHON_VERSION"
+
+# Check pip
+if ! command -v pip >/dev/null 2>&1; then
+    echo "Error: pip is not installed."
+    exit 1
+fi
+
+# Check if make is installed
+if ! command -v make >/dev/null 2>&1; then
+    echo "Error: 'make' is not installed. Please install it and try again."
+    exit 1
+fi
+
+read -p "Enter directory for database [$(pwd)/db]: " DATABASE_DIR
+DATABASE_DIR=${DATABASE_DIR:-$(pwd)/db}
+
+mkdir config
+
+touch config/db.toml
+echo "db_folder=\"$DATABASE_DIR\"" > config/db.toml
+
+mkdir $DATABASE_DIR
+
+echo "All requirements for setup are present."
+
+echo ""
+echo "Now you can run:"
+echo "  make install    # to install opensocial"
+echo "  make run        # to start the server"
+echo "  make clean      # to clear logs and caches"
+
+exit 0
