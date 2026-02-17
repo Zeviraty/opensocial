@@ -144,3 +144,14 @@ include
 *.db
 config
 /db
+
+run
+config/
+clean
+dbcli
+logs/
+OPENSOCIAL.tar.gz
+gcp
+lines
+testlogs.txt
+
