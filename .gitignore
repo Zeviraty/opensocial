@@ -143,3 +143,4 @@ include
 
 *.db
 config
+/db
