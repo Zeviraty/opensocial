@@ -36,10 +36,10 @@ check:
 	@echo "All checks passed!"
 
 dist:
-	rm -f TOME.tar.gz
+	rm -f OPENSOCIAL.tar.gz
 	mkdir -p dist-temp
 	find . -type f ! -name '*.pyc' ! -path './__pycache__/*' ! -path './.git/*' -exec cp --parents {} dist-temp/ \;
-	tar -czf TOME.tar.gz -C dist-temp .
+	tar -czf OPENSOCIAL.tar.gz -C dist-temp .
 	rm -rf dist-temp
 
 distcheck:
@@ -47,7 +47,7 @@ distcheck:
 	@$(MAKE) dist || { echo "Error: Failed to create the distribution package"; exit 1; }
 
 	@mkdir -p tmp-distcheck
-	@tar -xzf TOME.tar.gz -C tmp-distcheck
+	@tar -xzf OPENSOCIAL.tar.gz -C tmp-distcheck
 
 	@cd tmp-distcheck/ && ./configure && make
 	@cd tmp-distcheck/ && make check
@@ -55,4 +55,4 @@ distcheck:
 	@rm -rf tmp-distcheck
 
 	@echo "distcheck completed successfully!"
-	@rm -rf TOME.tar.gz
+	@rm -rf OPENSOCIAL.tar.gz
