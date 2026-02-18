@@ -3,5 +3,5 @@ CREATE TABLE accounts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     password TEXT,
-    banned BOOLEAN DEFAULT 0,
+    banned BOOLEAN DEFAULT 0
 );
